@@ -1,18 +1,18 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Hero } from '../hero';
-import { CommonModule } from '@angular/common';
 import { HeroService } from '../hero.service';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-heroes',
+  selector: 'app-dashboard',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './heroes.component.html',
-  styleUrl: './heroes.component.css'
+  templateUrl: './dashboard.component.html',
+  styleUrl: './dashboard.component.css'
 })
-export class HeroesComponent {
-  
+export class DashboardComponent {
+
   heroes: Hero[] = [];
 
   constructor(private heroService: HeroService) {}
@@ -22,6 +22,6 @@ export class HeroesComponent {
   }
 
   getHeroes(): void {
-    this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes);
+    this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes.slice(0, 5));
   }
 }
