@@ -3,14 +3,14 @@ import { Hero } from './hero';
 import { Observable, catchError, of, tap } from 'rxjs';
 import { MessageService } from './message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HeroService {
 
-  private baseUrl = 'http://localhost:3000';
-  private heroesUrl = `${this.baseUrl}/heroes`;
+  private heroesUrl = `${environment.api}/heroes`;
   private httpOptions = {
     headers: new HttpHeaders({ 'ContentType': 'application/json' })
   }
