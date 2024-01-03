@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
-import { Hero } from '../hero';
+import { Hero } from '../hero.model';
 import { CommonModule } from '@angular/common';
-import { HeroService } from '../hero.service';
 import { RouterModule } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { AppState } from '../app.config';
+import { heroesActions } from '../state/hero.actions';
+import { getHeroes } from '../state/hero.selectors';
 
 @Component({
   selector: 'app-heroes',
@@ -13,16 +17,14 @@ import { RouterModule } from '@angular/router';
 })
 export class HeroesComponent {
   
-  heroes: Hero[] = [];
+  heroes$: Observable<Hero[]>;
 
-  constructor(private heroService: HeroService) {}
-
-  ngOnInit() {
-    this.getHeroes();
+  constructor(private store: Store<AppState>) {
+    this.heroes$ = store.select(getHeroes);
   }
 
-  getHeroes(): void {
-    this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes);
+  ngOnInit() {
+    this.store.dispatch(heroesActions.loadHeroes())
   }
 
   add(name: string): void {
@@ -30,11 +32,10 @@ export class HeroesComponent {
     if (!name) {
       return;
     }
-    this.heroService.addHero({ name } as Hero).subscribe(hero => this.heroes.push(hero));
+    this.store.dispatch(heroesActions.addHero({ hero: { name } as Hero }));
   }
 
-  delete(id: number): void {
-    const filteredHeroes = this.heroes.filter(hero => hero.id !== id);
-    this.heroService.deleteHero(id).subscribe(() => this.heroes = filteredHeroes);
+  delete(hero: Hero): void {
+    this.store.dispatch(heroesActions.deleteHero({ heroId: hero.id }));
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Hero } from './hero.model';
-import { Observable, catchError, of, tap } from 'rxjs';
+import { Observable, catchError, map, of, tap } from 'rxjs';
 import { MessageService } from './message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../environments/environment';
@@ -49,18 +49,19 @@ export class HeroService {
     )
   }
 
-  addHero(hero: Hero): Observable<Hero>{
+  addHero(hero: Hero): Observable<Hero> {
     return this.http.post<Hero>(this.heroesUrl, hero, this.httpOptions).pipe(
       tap(newHero => this.messageService.add(`Hero with id = ${newHero.id} has been added`)),
       catchError(this.handleError<Hero>(`addHero with name = ${hero.name}`))
     )
   }
 
-  deleteHero(id: number): Observable<Hero>{
-    return this.http.delete<Hero>(`${this.heroesUrl}/${id}`, this.httpOptions).pipe(
-      tap(newHero => this.messageService.add(`Hero with id = ${id} has been deleted`)),
+  deleteHero(id: number): Observable<number> {
+    this.http.delete<{}>(`${this.heroesUrl}/${id}`, this.httpOptions).pipe(
+      tap(() => this.messageService.add(`Hero with id = ${id} has been deleted`)),
       catchError(this.handleError<Hero>(`deleteHero with id = ${id}`))
-    )
+    ).subscribe()
+    return of(id)
   }
 
   searchHeroes(name: string): Observable<Hero[]> {

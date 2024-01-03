@@ -4,6 +4,9 @@ import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HeroService } from '../hero.service';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AppState } from '../app.config';
+import { heroesActions } from '../state/hero.actions';
 
 @Component({
   selector: 'app-hero-details',
@@ -17,6 +20,7 @@ export class HeroDetailsComponent {
   @Input() hero?: Hero;
 
   constructor(
+    private store: Store<AppState>,
     private heroService: HeroService,
     private route: ActivatedRoute,
     private location: Location
@@ -37,7 +41,8 @@ export class HeroDetailsComponent {
 
   save(): void {
     if (this.hero) {
-      this.heroService.updateHero(this.hero).subscribe(() => this.goBack());
+      this.store.dispatch(heroesActions.updateHero({ hero: this.hero }));
+      this.goBack();
     }
   } 
 }

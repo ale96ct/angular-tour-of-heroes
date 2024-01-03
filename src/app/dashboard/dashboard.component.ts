@@ -1,9 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Hero } from '../hero.model';
-import { HeroService } from '../hero.service';
 import { RouterModule } from '@angular/router';
 import { HeroSearchComponent } from '../hero-search/hero-search.component';
+import { Observable } from 'rxjs';
+import { AppState } from '../app.config';
+import { Store } from '@ngrx/store';
+import { getDashboardHeroes, getHeroes } from '../state/hero.selectors';
+import { heroesActions } from '../state/hero.actions';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,15 +18,13 @@ import { HeroSearchComponent } from '../hero-search/hero-search.component';
 })
 export class DashboardComponent {
 
-  heroes: Hero[] = [];
+  heroes$: Observable<Hero[]>;
 
-  constructor(private heroService: HeroService) {}
-
-  ngOnInit() {
-    this.getHeroes();
+  constructor(private store: Store<AppState>) {
+    this.heroes$ = store.select(getDashboardHeroes);
   }
 
-  getHeroes(): void {
-    this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes.slice(0, 5));
+  ngOnInit() {
+    this.store.dispatch(heroesActions.loadHeroes())
   }
 }
