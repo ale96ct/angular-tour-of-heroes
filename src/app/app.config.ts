@@ -8,13 +8,16 @@ import { heroReducer } from './state/hero.reducer';
 import { provideEffects } from '@ngrx/effects';
 import { Hero } from './hero.model';
 import { HeroesEffects } from './state/hero.effects';
+import { messageReducer } from './state/message.reducer';
 
 export interface AppState {
-    heroes: Hero[]
+    heroes: Hero[],
+    messages: string[]
 }
 
 export const reducers: ActionReducerMap<AppState> = {
-    heroes: heroReducer
+    heroes: heroReducer,
+    messages: messageReducer
 }
 
 export const effects = [

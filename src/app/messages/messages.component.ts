@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
-import { MessageService } from '../message.service';
 import { CommonModule} from '@angular/common';
+import { Observable } from 'rxjs';
+import { AppState } from '../app.config';
+import { Store } from '@ngrx/store';
+import { getMessages, isEmpty } from '../state/message.selectors';
+import { messagesActions } from '../state/message.actions';
 
 @Component({
   selector: 'app-messages',
@@ -10,5 +14,16 @@ import { CommonModule} from '@angular/common';
   styleUrl: './messages.component.css'
 })
 export class MessagesComponent {
-  constructor(public messageService: MessageService) {}
+
+  messages$: Observable<string[]>;
+  isEmpty$: Observable<boolean>;
+
+  constructor(public store: Store<AppState>) {
+    this.messages$ = store.select(getMessages);
+    this.isEmpty$ = store.select(isEmpty);
+  }
+
+  clear() {
+    this.store.dispatch(messagesActions.clearMessages());
+  }
 }
