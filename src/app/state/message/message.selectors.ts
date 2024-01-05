@@ -1,4 +1,4 @@
-import { AppState } from '../app.config';
+import { AppState } from '../../app.config';
 
 export const getMessages = (state: AppState) => state.messages;
 

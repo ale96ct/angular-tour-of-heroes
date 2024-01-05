@@ -3,8 +3,8 @@ import { CommonModule} from '@angular/common';
 import { Observable } from 'rxjs';
 import { AppState } from '../app.config';
 import { Store } from '@ngrx/store';
-import { getMessages, isEmpty } from '../state/message.selectors';
-import { messagesActions } from '../state/message.actions';
+import { getMessages, isEmpty } from '../state/message/message.selectors';
+import { messagesActions } from '../state/message/message.actions';
 
 @Component({
   selector: 'app-messages',

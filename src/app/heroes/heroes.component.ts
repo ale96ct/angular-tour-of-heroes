@@ -5,8 +5,8 @@ import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from '../app.config';
-import { heroesActions } from '../state/hero.actions';
-import { getHeroes } from '../state/hero.selectors';
+import { heroesActions } from '../state/hero/hero.actions';
+import { getHeroes } from '../state/hero/hero.selectors';
 
 @Component({
   selector: 'app-heroes',

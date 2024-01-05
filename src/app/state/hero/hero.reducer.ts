@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { Hero } from "../hero.model"
+import { Hero } from "../../hero.model"
 import { heroesActions } from "./hero.actions";
 
 export const initialeState: Hero[] = [];

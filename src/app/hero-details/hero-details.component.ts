@@ -6,7 +6,7 @@ import { HeroService } from '../hero.service';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.config';
-import { heroesActions } from '../state/hero.actions';
+import { heroesActions } from '../state/hero/hero.actions';
 
 @Component({
   selector: 'app-hero-details',

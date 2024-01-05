@@ -4,11 +4,11 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { ActionReducerMap, provideStore } from '@ngrx/store';
-import { heroReducer } from './state/hero.reducer';
+import { heroReducer } from './state/hero/hero.reducer';
 import { provideEffects } from '@ngrx/effects';
 import { Hero } from './hero.model';
-import { HeroesEffects } from './state/hero.effects';
-import { messageReducer } from './state/message.reducer';
+import { HeroesEffects } from './state/hero/hero.effects';
+import { messageReducer } from './state/message/message.reducer';
 
 export interface AppState {
     heroes: Hero[],

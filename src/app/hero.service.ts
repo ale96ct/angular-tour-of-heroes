@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { AppState } from './app.config';
 import { Store } from '@ngrx/store';
-import { messagesActions } from './state/message.actions';
+import { messagesActions } from './state/message/message.actions';
 
 @Injectable({
   providedIn: 'root'

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY } from 'rxjs';
 import { map, exhaustMap, catchError, switchMap } from 'rxjs/operators';
-import { HeroService } from '../hero.service';
+import { HeroService } from '../../hero.service';
 import { heroesActions } from './hero.actions';
 
 @Injectable()

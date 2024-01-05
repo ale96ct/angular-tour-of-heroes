@@ -6,8 +6,8 @@ import { HeroSearchComponent } from '../hero-search/hero-search.component';
 import { Observable } from 'rxjs';
 import { AppState } from '../app.config';
 import { Store } from '@ngrx/store';
-import { getDashboardHeroes, getHeroes } from '../state/hero.selectors';
-import { heroesActions } from '../state/hero.actions';
+import { getDashboardHeroes, getHeroes } from '../state/hero/hero.selectors';
+import { heroesActions } from '../state/hero/hero.actions';
 
 @Component({
   selector: 'app-dashboard',
